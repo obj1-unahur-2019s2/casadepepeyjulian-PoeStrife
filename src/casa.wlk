@@ -48,10 +48,32 @@ object casaDePepeYJulian {
 	method nivelEnAumento(){
 		return cosas.last().precio().div(2) >= cosas.first().precio() 
 	}
+	/*Desafios */
 	method primeraComidaComprada(){
 		return cosas.filter({c => c.esComida()}).first()
 	}
-	method gastar(importe){
+	method precioPromedioComida(){
+		var listaComida = cosas.filter({c => c.esComida()})
+		return listaComida.sum({c => c.precio()}).div(listaComida.size())
 		
+	}
+	method repitioCompra(){
+		return cosas.any ({cosa => cosas.occurrencesOf(cosa) > 1})
+	}
+	method tiene(cosa){
+		return cosas.any({objeto => objeto.hayUnObjeto(cosa)})
+	}
+	method aumentoCreciente(){ 
+		return cosas == cosas.sortedBy({cosa1, cosa2 => cosa1.precio() < cosa2.precio()}) 
+	}
+	method comidaSalteada(){
+		return cosas == cosas.sortedBy({cosa1, cosa2 => (cosa1.esComida() and cosa2.esElectrodomestico())
+			or 
+			(cosa1.esElectrodomestico() and cosa2.esComida())}) 
+	}
+	method sad(){
+		return cosas.sortedBy({cosa1, cosa2 => (cosa1.esComida() and cosa2.esElectrodomestico())
+			or 
+			(cosa1.esElectrodomestico() and cosa2.esComida())})
 	}
 }
